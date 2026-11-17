@@ -157,7 +157,24 @@ users.controller.js apply logic and filters
 8. Bruno receives the response.
 
 
-                                    VIII. Conclusion 
+                                        VIII. Request Lyfecycle Explanation
+
+Client / Bruno -> Bruno is our client for the taskforge-api. Bruno send request via HTTP method such GET, POST, PATCH, DELETE
+HTTP Request -> HTTP request is enable via express web framework. HTTP is the communication protocol. 
+Express Application -> Express Application is the Javascript Web framework that allow us to send and receive HTTP request. Express Application is built on top of Node.js. Node.js allows us to run Javascript outside the browser. 
+JSON Middleware -> JSON Middleware is a middleman that sits between the app.js, routers, and other middlewares. It parse the request body into the right Javscript format to make it avaible for other files 
+Logger Middleware -> The logger middleware has the fs/promise/async method. When app.js finishes what it is intended, the logger middleware log the request, sends it to routers with next() or to middleware error handler if there is an error in the request with next(error). It wait for the file writting process to apply the response custom header. 
+Task Router -> The task Router has specific api endpoints regarding tasks. It send the request to the controller and somone the correct path or logic request method. 
+Task Controller -> This where our logic resides. It check the request method, apply filters, or make sure the req.body or req.params has requires information before sending back the response. 
+Validation -> Validation checks whether incoming data meets requirements before the application processes it and response travels back to bruno. This response can also be 200 ok, 201 missing filed, 400 bad request, 404 bad route, 500 server error 
+Check Project -> This can be done via a Bruno GET request through http://localhost:3000/api/projects
+Check Assigned User -> Checking assigned user can be done via Bruno GET request http://localhost:3000/api/users
+Create JavaScript Object -> You can create a Javascript object through Bruno POST or PATCH with a json req.body or req.params. If all required fileds are provided, the newly created array can be added via users.push(newuser). You can also create a Javacsript array directly inside data.js.
+Push Into Array -> This is done in the controllers with the push method.
+HTTP 201 Response -> HTTP 201 reffers to the req/res went well.
+Client --> our client in this example is Bruno. The client send in HTTP method with a GET, POST, PATCH, or DELETE to API. 
+
+                                          IX. Conclusion 
 
 Interact with API through a API tester tool.
 
@@ -168,4 +185,4 @@ controllers.js will execute request.
 Get --> /api/users --> gives you all user 
 Get --> /api/users/2 --> retrieve user 2 
 delete --> /api/users?role=developer --> delete users with role set to developer 
-patch --> /api/user/2 --> will update user number two with the specific changes. This done with a req.body and currently set to update email, name, role, and status  (whihc set to active by default).
+patch --> /api/user/2 --> will update user number two with the specific changes. This done with a req.body and currently set to update email, name, role, and status  (which set to "active" by default).
